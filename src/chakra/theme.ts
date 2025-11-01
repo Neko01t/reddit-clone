@@ -17,6 +17,7 @@ export const theme = extendTheme({
     global: (props: any) => ({
       body: {
         bg: props.colorMode === "light" ? "gray.200" : "blackAlpha.900",
+        color: props.colorMode === "light" ? "gray.800" : "gray.100",
       },
     }),
   },
