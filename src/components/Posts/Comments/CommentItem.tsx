@@ -24,6 +24,7 @@ const CommentItem: FC<CommentItemProps> = ({
   loadingDelete,
   comment,
 }) => {
+  const [wasEdited, setWasEdited] = useState(false);// its temporary Idk how Db is working add the timestamp and vairable in db for editing 
   const [editInput, setEditInput] = useState(false);
   const [editText, setEditText] = useState(comment.text);
   const { postStateValue } = usePostsData();
@@ -51,7 +52,11 @@ const CommentItem: FC<CommentItemProps> = ({
             onChange={(e) => setEditText(e.target.value)}
           />
         ) : (
-          <Text fontSize="14pt">{comment.text}</Text>
+        <Text fontSize="14pt">
+          {comment.text}{" "}
+          {wasEdited && (
+          <Text as="span" fontSize="10pt" color="gray.500">(edited)</Text>)}
+        </Text>
         )}
         <Stack
           direction="row"
@@ -72,6 +77,7 @@ const CommentItem: FC<CommentItemProps> = ({
                   onClick={() => {
                     onUpdateComment(comment.id, editText);
                     setEditInput(false);
+                    setWasEdited(true);   
                   }}
                 >
                   Save
